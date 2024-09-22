@@ -1,0 +1,42 @@
+name: Create and Publish NuGet Package for gstreamer-netcore-ges
+
+on:
+  push:
+    branches:
+      - mingw-ges  # Run only on pushes to the mingw-ges branch
+  pull_request:
+    branches:
+      - mingw-ges
+
+jobs:
+  build:
+    runs-on: windows-latest  # Use Windows, as requested
+
+    steps:
+      # Step 1: Checkout the repository
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      # Step 2: Setup .NET environment
+      - name: Setup .NET Core
+        uses: actions/setup-dotnet@v3
+        with:
+          dotnet-version: '3.1.x'  # Target netcoreapp3.1
+
+      # Step 3: Restore dependencies
+      - name: Restore dependencies
+        run: dotnet restore gstreamer-sharp-ges-netcore.csproj
+
+      # Step 4: Build the project in Release mode
+      - name: Build the project
+        run: dotnet build gstreamer-sharp-ges-netcore.csproj --configuration Release
+
+      # Step 5: Pack the project into a NuGet package
+      - name: Pack the project
+        run: dotnet pack gstreamer-sharp-ges-netcore.csproj --configuration Release --output ./nupkg
+
+      # Step 6: Publish the package to NuGet (optional, requires secret key)
+      - name: Publish to NuGet
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}  # Store your API key in GitHub Secrets
+        run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
