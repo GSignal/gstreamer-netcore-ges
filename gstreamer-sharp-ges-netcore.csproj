@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <RootNamespace>GES</RootNamespace>
-    <AssemblyName>gstreamer-sharp-ges-netcore</AssemblyName>
+    <AssemblyName>gstreamer-sharp-mingw-ges-netcore</AssemblyName>
     <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
     <NoWarn>108;114;168;169;618;659</NoWarn>
     <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
@@ -12,10 +12,10 @@
   <PropertyGroup>
     <Title>GstSharp for .NET Core</Title>
     <PackageDescription>GStreamer .NET Core Bindings</PackageDescription>
-    <Version>0.0.8</Version>
-    <Authors>vladkol</Authors>
+    <Version>0.0.1</Version>
+    <Authors>raghava</Authors>
     <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
-    <RepositoryUrl>https://github.com/vladkol/gstreamer-netcore</RepositoryUrl>
+    <RepositoryUrl>https://github.com/GSignal/gstreamer-netcore-ges</RepositoryUrl>
     <Copyright>Copyright 2020</Copyright>
     <PackageIcon>icon.png</PackageIcon>
     <PackageTags>GStreamer GstSharp bindings</PackageTags>
