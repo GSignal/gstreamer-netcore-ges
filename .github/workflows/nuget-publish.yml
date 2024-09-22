@@ -53,9 +53,9 @@ jobs:
       - name: Publish gstreamer-sharp-netcore to NuGet
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}  # Store your API key in GitHub Secrets
-        run: dotnet nuget push .\nupkg\gstreamer-sharp-netcore.*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push .\nupkg\gstreamer-sharp-mingw-netcore.*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
 
       - name: Publish gstreamer-sharp-ges-netcore to NuGet
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}  # Store your API key in GitHub Secrets
-        run: dotnet nuget push .\nupkg\gstreamer-sharp-ges-netcore.*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push .\nupkg\gstreamer-sharp-mingw-ges-netcore.*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
