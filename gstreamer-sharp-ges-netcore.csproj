@@ -1,0 +1,37 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <RootNamespace>GES</RootNamespace>
+    <AssemblyName>gstreamer-sharp-ges-netcore</AssemblyName>
+    <AllowUnsafeBlocks>true</AllowUnsafeBlocks>
+    <NoWarn>108;114;168;169;618;659</NoWarn>
+    <EnableDefaultCompileItems>false</EnableDefaultCompileItems>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <Title>GstSharp for .NET Core</Title>
+    <PackageDescription>GStreamer .NET Core Bindings</PackageDescription>
+    <Version>0.0.8</Version>
+    <Authors>vladkol</Authors>
+    <PackageLicenseExpression>LGPL-2.1-only</PackageLicenseExpression>
+    <RepositoryUrl>https://github.com/vladkol/gstreamer-netcore</RepositoryUrl>
+    <Copyright>Copyright 2020</Copyright>
+    <PackageIcon>icon.png</PackageIcon>
+    <PackageTags>GStreamer GstSharp bindings</PackageTags>
+    <IncludeContentInPack>true</IncludeContentInPack>
+  </PropertyGroup>
+<!--  <ItemGroup>-->
+<!--    <PackageReference Include="GioSharp" Version="3.22.25.74" />-->
+<!--    <PackageReference Include="GLibSharp" Version="3.22.25.74" />-->
+<!--  </ItemGroup>-->
+  <ItemGroup>
+    <None Include="icon.png" Pack="true" PackagePath="" />
+    <EmbeddedResource Include="gstreamer-sharp\ges\gst-editing-services-sharp.dll.config" />
+    <Compile Include="gstreamer-sharp\ges\generated\**\*.cs"/>
+    <Compile Include="gst-netcore\**\GesModuleInitializer.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="gstreamer-sharp-netcore.csproj" />
+  </ItemGroup>
+</Project>

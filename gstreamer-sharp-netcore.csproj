@@ -21,7 +21,6 @@
     <PackageTags>GStreamer GstSharp bindings</PackageTags>
     <IncludeContentInPack>true</IncludeContentInPack>
   </PropertyGroup>
-
   <ItemGroup>
     <PackageReference Include="GioSharp" Version="3.22.25.74" />
     <PackageReference Include="GLibSharp" Version="3.22.25.74" />
@@ -31,6 +30,6 @@
     <EmbeddedResource Include="gstreamer-sharp\sources\gstreamer-sharp.dll.config" />
     <Compile Include="gstreamer-sharp\sources\custom\**\*.cs" />
     <Compile Include="gstreamer-sharp\sources\generated\**\*.cs" Exclude="gstreamer-sharp\sources\generated\Gst\PadTemplate.cs" />
-    <Compile Include="gst-netcore\**\*.cs" />
+    <Compile Include="gst-netcore\**\*.cs" Exclude="gst-netcore\**\GesModuleInitializer.cs" />
   </ItemGroup>
 </Project>
