@@ -1,4 +1,4 @@
-name: Create and Publish NuGet Package for gstreamer-netcore-ges
+name: Build and Publish NuGet Packages for gstreamer-netcore-ges
 
 on:
   push:
@@ -10,33 +10,47 @@ on:
 
 jobs:
   build:
-    runs-on: windows-latest  # Use Windows, as requested
+    runs-on: windows-latest  # Use Windows, as specified
 
     steps:
       # Step 1: Checkout the repository
       - name: Checkout code
         uses: actions/checkout@v3
 
-      # Step 2: Setup .NET environment
+      # Step 2: Setup .NET Core
       - name: Setup .NET Core
         uses: actions/setup-dotnet@v3
         with:
           dotnet-version: '3.1.x'  # Target netcoreapp3.1
 
-      # Step 3: Restore dependencies
-      - name: Restore dependencies
+      # Step 3: Restore dependencies for both projects
+      - name: Restore dependencies for gstreamer-sharp-netcore
+        run: dotnet restore gstreamer-sharp-netcore.csproj
+
+      - name: Restore dependencies for gstreamer-sharp-ges-netcore
         run: dotnet restore gstreamer-sharp-ges-netcore.csproj
 
-      # Step 4: Build the project in Release mode
-      - name: Build the project
+      # Step 4: Build both projects in Release mode
+      - name: Build gstreamer-sharp-netcore
+        run: dotnet build gstreamer-sharp-netcore.csproj --configuration Release
+
+      - name: Build gstreamer-sharp-ges-netcore
         run: dotnet build gstreamer-sharp-ges-netcore.csproj --configuration Release
 
-      # Step 5: Pack the project into a NuGet package
-      - name: Pack the project
+      # Step 5: Pack both projects into NuGet packages
+      - name: Pack gstreamer-sharp-netcore
+        run: dotnet pack gstreamer-sharp-netcore.csproj --configuration Release --output ./nupkg
+
+      - name: Pack gstreamer-sharp-ges-netcore
         run: dotnet pack gstreamer-sharp-ges-netcore.csproj --configuration Release --output ./nupkg
 
-      # Step 6: Publish the package to NuGet (optional, requires secret key)
-      - name: Publish to NuGet
+      # Step 6: Publish both packages to NuGet (optional, requires secret key)
+      - name: Publish gstreamer-sharp-netcore to NuGet
         env:
           NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}  # Store your API key in GitHub Secrets
-        run: dotnet nuget push ./nupkg/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+        run: dotnet nuget push ./nupkg/gstreamer-sharp-netcore.*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
+
+      - name: Publish gstreamer-sharp-ges-netcore to NuGet
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}  # Store your API key in GitHub Secrets
+        run: dotnet nuget push ./nupkg/gstreamer-sharp-ges-netcore.*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
