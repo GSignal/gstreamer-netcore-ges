@@ -21,10 +21,10 @@
     <PackageTags>GStreamer GstSharp bindings</PackageTags>
     <IncludeContentInPack>true</IncludeContentInPack>
   </PropertyGroup>
-<!--  <ItemGroup>-->
-<!--    <PackageReference Include="GioSharp" Version="3.22.25.74" />-->
-<!--    <PackageReference Include="GLibSharp" Version="3.22.25.74" />-->
-<!--  </ItemGroup>-->
+  <ItemGroup>
+    <PackageReference Include="GioSharp" Version="3.22.25.74" />
+    <PackageReference Include="GLibSharp" Version="3.22.25.74" />
+  </ItemGroup>
   <ItemGroup>
     <None Include="icon.png" Pack="true" PackagePath="" />
     <EmbeddedResource Include="gstreamer-sharp\ges\gst-editing-services-sharp.dll.config" />
